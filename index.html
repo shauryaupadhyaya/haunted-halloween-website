@@ -3,52 +3,1621 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haunted Halloween Event 2025 🎃</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Haunted Halloween 2025</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #111111;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --accent-orange: #ff6b00;
+            --accent-purple: #8b00ff;
+            --accent-red: #ff0000;
+            --border-color: #222222;
+            --background-dark: #060010;
+            --white: hsl(0, 0%, 100%);
+        }
+
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        /* Liquid Ether Background */
+        .liquid-ether-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        .card-nav-container {
+            position: fixed;
+            top: 2em;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            z-index: 99;
+            box-sizing: border-box;
+        }
+
+        .card-nav {
+            display: block;
+            height: 60px;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            will-change: height;
+        }
+
+        .card-nav-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0.45rem 0.55rem 1.1rem;
+            z-index: 2;
+        }
+
+        .hamburger-menu {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            gap: 6px;
+            color: #ff6b00;
+        }
+
+        .hamburger-menu:hover .hamburger-line {
+            opacity: 0.75;
+        }
+
+        .hamburger-line {
+            width: 30px;
+            height: 2px;
+            background-color: currentColor;
+            transition: transform 0.25s ease, opacity 0.2s ease, margin 0.3s ease;
+            transform-origin: 50% 50%;
+        }
+
+        .hamburger-menu.open .hamburger-line:first-child {
+            transform: translateY(4px) rotate(45deg);
+        }
+
+        .hamburger-menu.open .hamburger-line:last-child {
+            transform: translateY(-4px) rotate(-45deg);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .logo {
+            height: 28px;
+        }
+
+        .card-nav-cta-button {
+            display: none;
+        }
+
+        .card-nav-content {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 60px;
+            bottom: 0;
+            padding: 0.5rem;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            visibility: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card-nav.open .card-nav-content {
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .nav-card {
+            height: 100%;
+            flex: 1 1 0;
+            min-width: 0;
+            border-radius: calc(0.75rem - 0.2rem);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 12px 16px;
+            gap: 8px;
+            user-select: none;
+        }
+
+        .nav-card-label {
+            font-weight: 400;
+            font-size: 22px;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-card-links {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .nav-card-link {
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: white;
+        }
+
+        .nav-card-link:hover {
+            opacity: 0.75;
+        }
+
+        /* Hero Section */
+        .halloween-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 50px;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--accent-orange);
+            text-shadow: 0 0 20px var(--accent-orange);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .countdown-item {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+            min-width: 120px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .countdown-value {
+            display: block;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-orange);
+            text-shadow: 0 0 10px var(--accent-orange);
+            font-family: "Courier New", monospace;
+        }
+
+        .countdown-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+
+        .glow-box {
+            box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);
+        }
+
+        .glow-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 30px rgba(255, 107, 0, 0.6), 0 10px 30px rgba(255, 107, 0, 0.3);
+        }
+
+        .hero-cta {
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-orange);
+            color: var(--bg-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--accent-orange);
+            transform: scale(1.05);
+        }
+
+        /* About Section */
+        .about-section {
+            background: var(--bg-secondary);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--accent-orange);
+        }
+
+        .section-description {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Schedule Section */
+        .schedule-section {
+            background: var(--bg-primary);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 100px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent-orange);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 180px;
+            margin-bottom: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-time {
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-orange);
+            font-weight: bold;
+            font-size: 1rem;
+            font-family: "Courier New", monospace;
+            width: 80px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 82px;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 2px solid var(--accent-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-content {
+            border-color: var(--accent-orange);
+            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.2);
+        }
+
+        .timeline-item:hover .timeline-marker {
+            transform: scale(1.1);
+            background: var(--accent-orange);
+        }
+
+        .timeline-content h3 {
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .timeline-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .timeline-item.expanded .timeline-details {
+            max-height: 500px;
+        }
+
+        /* Magic Bento Grid */
+        .bento-section {
+            background: var(--bg-primary);
+        }
+
+        .card-grid {
+            display: grid;
+            gap: 0.5em;
+            padding: 0.75em;
+            max-width: 54em;
+            margin: 0 auto;
+            font-size: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            aspect-ratio: 4/3;
+            min-height: 200px;
+            width: 100%;
+            max-width: 100%;
+            padding: 1.25em;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--background-dark);
+            font-weight: 300;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            --glow-x: 50%;
+            --glow-y: 50%;
+            --glow-intensity: 0;
+            --glow-radius: 200px;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card__header,
+        .card__content {
+            display: flex;
+            position: relative;
+            color: var(--white);
+        }
+
+        .card__header {
+            gap: 0.75em;
+            justify-content: space-between;
+        }
+
+        .card__content {
+            flex-direction: column;
+        }
+
+        .card__label {
+            font-size: 16px;
+        }
+
+        .card__title,
+        .card__description {
+            --clamp-title: 1;
+            --clamp-desc: 2;
+        }
+
+        .card__title {
+            font-weight: 400;
+            font-size: 16px;
+            margin: 0 0 0.25em;
+        }
+
+        .card__description {
+            font-size: 12px;
+            line-height: 1.2;
+            opacity: 0.9;
+        }
+
+        .card--border-glow::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 6px;
+            background: radial-gradient(
+                var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+                rgba(255, 107, 0, calc(var(--glow-intensity) * 0.8)) 0%,
+                rgba(255, 107, 0, calc(var(--glow-intensity) * 0.4)) 30%,
+                transparent 60%
+            );
+            border-radius: inherit;
+            mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            mask-composite: subtract;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .card--border-glow:hover::after {
+            opacity: 1;
+        }
+
+        .card--border-glow:hover {
+            box-shadow:
+                0 4px 20px rgba(46, 24, 78, 0.4),
+                0 0 30px rgba(255, 107, 0, 0.2);
+        }
+
+        /* Team Section */
+        .team-section {
+            background: var(--bg-primary);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Profile Card */
+        .pc-card-wrapper {
+            perspective: 500px;
+            transform: translate3d(0, 0, 0.1px);
+            position: relative;
+            touch-action: none;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            --pointer-x: 50%;
+            --pointer-y: 50%;
+            --pointer-from-center: 0;
+            --pointer-from-top: 0.5;
+            --pointer-from-left: 0.5;
+            --card-opacity: 0;
+            --rotate-x: 0deg;
+            --rotate-y: 0deg;
+            --background-x: 50%;
+            --background-y: 50%;
+        }
+
+        .pc-card {
+            height: 400px;
+            display: grid;
+            aspect-ratio: 0.718;
+            border-radius: 30px;
+            position: relative;
+            background-blend-mode: color-dodge, normal, normal, normal;
+            animation: glow-bg 12s linear infinite;
+            box-shadow: rgba(0, 0, 0, 0.8) calc((var(--pointer-from-left) * 10px) - 3px) calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px;
+            transition: transform 1s ease;
+            transform: translate3d(0, 0, 0.1px) rotateX(0deg) rotateY(0deg);
+            background-size: 100% 100%;
+            background-position: 0 0, 0 0, 50% 50%, 0 0;
+            background-image: radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y), hsla(266, 100%, 90%, var(--card-opacity)) 4%, hsla(266, 50%, 80%, calc(var(--card-opacity) * 0.75)) 10%, hsla(266, 25%, 70%, calc(var(--card-opacity) * 0.5)) 50%, hsla(266, 0%, 60%, 0) 100%), radial-gradient(35% 52% at 55% 20%, #00ffaac4 0%, #073aff00 100%), radial-gradient(100% 100% at 50% 50%, #00c1ffff 1%, #073aff00 76%), conic-gradient(from 124deg at 50% 50%, #c137ffff 0%, #07c6ffff 40%, #07c6ffff 60%, #c137ffff 100%);
+            overflow: hidden;
+        }
+
+        .pc-card:hover,
+        .pc-card.active {
+            transition: none;
+            transform: translate3d(0, 0, 0.1px) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
+        }
+
+        .pc-card * {
+            display: grid;
+            grid-area: 1/-1;
+            border-radius: 30px;
+            transform: translate3d(0, 0, 0.1px);
+            pointer-events: none;
+        }
+
+        .pc-inside {
+            inset: 1px;
+            position: absolute;
+            background-image: linear-gradient(145deg, #60496e8c 0%, #71C4FF44 100%);
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translate3d(0, 0, 0.01px);
+        }
+
+        .pc-content {
+            max-height: 100%;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            transform: translate3d(calc(var(--pointer-from-left) * -6px + 3px), calc(var(--pointer-from-top) * -6px + 3px), 0.1px) !important;
+            z-index: 5;
+            mix-blend-mode: luminosity;
+        }
+
+        .pc-details {
+            width: 100%;
+            position: absolute;
+            top: 3em;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pc-details h3 {
+            font-weight: 600;
+            margin: 0;
+            font-size: min(5svh, 3em);
+            margin: 0;
+            background-image: linear-gradient(to bottom, #fff, #6f6fbe);
+            background-size: 1em 1.5em;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+
+        .pc-details p {
+            font-weight: 600;
+            position: relative;
+            top: -12px;
+            white-space: nowrap;
+            font-size: 16px;
+            margin: 0 auto;
+            width: min-content;
+            background-image: linear-gradient(to bottom, #fff, #4a4ac0);
+            background-size: 1em 1.5em;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+
+        .pc-user-info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 12px 14px;
+            pointer-events: auto;
+        }
+
+        .pc-user-details {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pc-mini-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+        }
+
+        .pc-mini-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .pc-user-text {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .pc-handle {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1;
+        }
+
+        .pc-status {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1;
+        }
+
+        .pc-contact-btn {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+            background: transparent;
+            pointer-events: auto;
+        }
+
+        .pc-contact-btn:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-1px);
+            transition: all 0.2s ease;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--bg-secondary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+        }
+
+        .contact-item h3 {
+            color: var(--accent-orange);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item p {
+            color: var(--text-secondary);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+        }
+
+        .submit-button {
+            padding: 1rem;
+            background: var(--accent-orange);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-button:hover {
+            background: var(--accent-purple);
+            transform: translateY(-2px);
+        }
+
+        /* RSVP Section */
+        .rsvp-section {
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .rsvp-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .rsvp-button {
+            padding: 1.5rem 3rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .rsvp-yes {
+            border-color: var(--accent-orange);
+        }
+
+        .rsvp-yes:hover {
+            background: var(--accent-orange);
+            color: var(--bg-primary);
+            transform: scale(1.05);
+        }
+
+        .rsvp-yes.clicked {
+            animation: dareAnimation 0.6s ease;
+        }
+
+        .rsvp-no {
+            border-color: var(--accent-purple);
+        }
+
+        .rsvp-no:hover {
+            background: var(--accent-purple);
+            color: var(--bg-primary);
+            transform: scale(1.05);
+        }
+
+        .rsvp-message {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            min-height: 30px;
+            color: var(--accent-orange);
+        }
+
+        @keyframes dareAnimation {
+            0% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1) rotate(5deg);
+            }
+            50% {
+                transform: scale(1.15) rotate(-5deg);
+            }
+            75% {
+                transform: scale(1.1) rotate(3deg);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--bg-primary);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--accent-orange);
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--accent-orange);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: var(--bg-secondary);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--accent-orange);
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            padding: 2rem 1rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay span {
+            color: var(--text-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Games Section */
+        .games-section {
+            background: var(--bg-primary);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.3);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-card h3 {
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .game-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Contests Section */
+        .contests-section {
+            background: var(--bg-secondary);
+        }
+
+        .contests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contest-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .contest-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.3);
+        }
+
+        .contest-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contest-card h3 {
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .contest-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            padding: 3rem 20px 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+        }
+
+        .footer-column p {
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .social-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover {
+            color: var(--accent-orange);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .footer-warning {
+            color: var(--accent-red);
+            margin-top: 0.5rem;
+        }
+
+        /* Animations and Effects */
+        .bat {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 15s infinite ease-in-out;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-100px) translateX(50px);
+            }
+            50% {
+                transform: translateY(-50px) translateX(-50px);
+            }
+            75% {
+                transform: translateY(-150px) translateX(30px);
+            }
+        }
+
+        .glitch {
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% {
+                transform: translate(0);
+            }
+            92% {
+                transform: translate(-2px, 2px);
+            }
+            94% {
+                transform: translate(2px, -2px);
+            }
+            96% {
+                transform: translate(-2px, -2px);
+            }
+            98% {
+                transform: translate(2px, 2px);
+            }
+        }
+
+        .flicker {
+            animation: flicker 4s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% {
+                opacity: 1;
+            }
+            41.99% {
+                opacity: 1;
+            }
+            42% {
+                opacity: 0;
+            }
+            43% {
+                opacity: 0;
+            }
+            43.01% {
+                opacity: 1;
+            }
+            47.99% {
+                opacity: 1;
+            }
+            48% {
+                opacity: 0;
+            }
+            49% {
+                opacity: 0;
+            }
+            49.01% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes glow-bg {
+            0% {
+                --bgrotate: 0deg;
+            }
+            100% {
+                --bgrotate: 360deg;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card-nav-container {
+                width: 90%;
+                top: 1.2em;
+            }
+
+            .card-nav-top {
+                padding: 0.5rem 1rem;
+                justify-content: space-between;
+            }
+
+            .hamburger-menu {
+                order: 2;
+            }
+
+            .logo-container {
+                position: static;
+                transform: none;
+                order: 1;
+            }
+
+            .card-nav-cta-button {
+                display: none;
+            }
+
+            .card-nav-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+                padding: 0.5rem;
+                bottom: 0;
+                justify-content: flex-start;
+            }
+
+            .nav-card {
+                height: auto;
+                min-height: 60px;
+                flex: 1 1 auto;
+                max-height: none;
+            }
+
+            .nav-card-label {
+                font-size: 18px;
+            }
+
+            .nav-card-link {
+                font-size: 15px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .countdown {
+                gap: 1rem;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+                padding: 1rem;
+            }
+
+            .countdown-value {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                padding-left: 60px;
+            }
+
+            .timeline-time {
+                position: relative;
+                left: 0;
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .timeline-marker {
+                left: 5px;
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                width: 90%;
+                margin: 0 auto;
+                padding: 0.5em;
+            }
+
+            .card {
+                width: 100%;
+                min-height: 180px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .pc-card {
+                height: 350px;
+            }
+
+            .pc-details h3 {
+                font-size: min(4svh, 2.5em);
+            }
+
+            .pc-details p {
+                font-size: 14px;
+            }
+
+            .pc-user-info {
+                bottom: 15px;
+                left: 15px;
+                right: 15px;
+                padding: 10px 12px;
+            }
+
+            .pc-mini-avatar {
+                width: 28px;
+                height: 28px;
+            }
+
+            .pc-user-details {
+                gap: 10px;
+            }
+
+            .pc-handle {
+                font-size: 13px;
+            }
+
+            .pc-status {
+                font-size: 10px;
+            }
+
+            .pc-contact-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .rsvp-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .rsvp-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .games-grid, .contests-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .card-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .card:nth-child(3) {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            .card:nth-child(4) {
+                grid-column: 1 / span 2;
+                grid-row: 2 / span 2;
+            }
+
+            .card:nth-child(6) {
+                grid-column: 4;
+                grid-row: 3;
+            }
+        }
+
+    .haunted-dialog {
+        position: fixed;
+        bottom: 7vh;
+        left: 50vw;
+        transform: translate(-50%, 0) scale(1.04) rotate(-2deg);
+        background: rgba(0,0,0,0.88);
+        color: #fff;
+        font-family: "Courier New", Courier, monospace;
+        border: 2px solid #ff0000;
+        border-radius: 14px;
+        padding: 1.3em 2em;
+        z-index: 99999;
+        box-shadow: 0 0 40px #8b00ff;
+        font-size: 2rem;
+        letter-spacing: 0.1em;
+        pointer-events: none;
+        animation: flicker 2s;
+    }
+    .cursed {
+        animation: curse-spin 0.9s cubic-bezier(.68,-0.6,.32,1.6) infinite alternate;
+        filter: hue-rotate(90deg) blur(0.5px) contrast(1.4);
+    }
+    @keyframes curse-spin {
+        0% { transform: rotate(0deg) scale(1.01);}
+        70% { transform: rotate(-6deg) scale(0.91);}
+        100% { transform: rotate(4.3deg) scale(1.08);}
+    }
+    .ghost-flash {
+        position: fixed;
+        left: 50vw;
+        top: 45vh;
+        width: 80px;
+        opacity: 0.83;
+        filter: blur(0.5px) grayscale(60%);
+        transform: translate(-50%, -50%) scale(1.1);
+        z-index: 99999;
+        pointer-events: none;
+        animation: flicker 0.15s;
+    }
+    .reverse-scroll {
+        animation: reverse-scroll 4s alternate infinite;
+    }
+    @keyframes reverse-scroll {
+        0% { transform: none; }
+        8% { transform: scaleY(-1); }
+        11% { transform: none; }
+        15% { transform: scaleY(-1); }
+        100% { transform: none;}
+    }
+
+    </style>
 </head>
 <body>
+    <!-- Liquid Ether Background -->
+    <div id="liquidEther" class="liquid-ether-container"></div>
 
-    <div class="bat" style="left: 10%; animation-delay: 0s;">🦇</div>
-    <div class="bat" style="left: 30%; animation-delay: 2s;">🦇</div>
-    <div class="bat" style="left: 50%; animation-delay: 4s;">🦇</div>
-    <div class="bat" style="left: 70%; animation-delay: 1s;">🦇</div>
-    <div class="bat" style="left: 90%; animation-delay: 3s;">🦇</div>
+    <!-- Navigation -->
+    <div class="card-nav-container">
+        <nav class="card-nav" id="cardNav">
+            <div class="card-nav-top">
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
 
+                <div class="logo-container">
+                    <span class="logo-icon">🎃</span>
+                </div>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-icon">🎃</span>
-                <span class="logo-text glitch" data-text="HAUNTED HALLOWEEN">HAUNTED HALLOWEEN</span>
+                <button class="card-nav-cta-button">
+                    Get Started
+                </button>
             </div>
-            <button class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#schedule" class="nav-link">Schedule</a></li>
-                <li><a href="#gallery" class="nav-link">Gallery</a></li>
-                <li><a href="#faq" class="nav-link">FAQ</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
+            <div class="card-nav-content">
+                <div class="nav-card" style="background-color: #ff8c00; color: #fff;">
+                    <div class="nav-card-label">Home</div>
+                    <div class="nav-card-links">
+                        <a class="nav-card-link" href="#about">About</a>
+                        <a class="nav-card-link" href="#schedule">Schedule</a>
+                        <a class="nav-card-link" href="#rsvp">RSVP</a>
+                    </div>
+                </div>
+                <div class="nav-card" style="background-color: #ff6b00; color: #fff;">
+                    <div class="nav-card-label">Activities</div>
+                    <div class="nav-card-links">
+                        <a class="nav-card-link" href="#bento">Events</a>
+                        <a class="nav-card-link" href="#games">Games</a>
+                        <a class="nav-card-link" href="#contests">Contests</a>
+                    </div>
+                </div>
+                <div class="nav-card" style="background-color: #ff4500; color: #fff;">
+                    <div class="nav-card-label">Info</div>
+                    <div class="nav-card-links">
+                        <a class="nav-card-link" href="#team">Team</a>
+                        <a class="nav-card-link" href="#gallery">Gallery</a>
+                        <a class="nav-card-link" href="#faq">FAQ</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
 
-    <section id="home" class="hero">
+    <!-- Hero Section -->
+    <section id="home" class="halloween-hero">
         <div class="container">
+            <!-- Floating Bats -->
+            <div class="bat" style="left: 10%; animation-delay: 0s;">🦇</div>
+            <div class="bat" style="left: 30%; animation-delay: 2s;">🦇</div>
+            <div class="bat" style="left: 50%; animation-delay: 4s;">🦇</div>
+            <div class="bat" style="left: 70%; animation-delay: 1s;">🦇</div>
+            <div class="bat" style="left: 90%; animation-delay: 3s;">🦇</div>
+
             <h1 class="hero-title glitch" data-text="HAUNTED HALLOWEEN">HAUNTED HALLOWEEN</h1>
             <p class="hero-subtitle flicker">Enter if you dare... October 31st, 2025</p>
+            
+            <!-- Countdown -->
+            <div class="countdown">
+                <div class="countdown-item glow-box">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item glow-box">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item glow-box">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item glow-box">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+
             <div class="hero-cta">
                 <a href="#rsvp" class="cta-button">Join the Nightmare</a>
             </div>
         </div>
     </section>
 
-    <section id="about" class="section">
+    <!-- About Section -->
+    <section id="about" class="about-section">
         <div class="container">
             <h2 class="section-title">About the Event</h2>
             <p class="section-description">
@@ -56,6 +1625,7 @@
                 that will haunt your dreams. Prepare yourself for a night of spine-chilling entertainment, 
                 mysterious encounters, and unforgettable frights.
             </p>
+
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">👻</div>
@@ -81,67 +1651,14 @@
         </div>
     </section>
 
-    <section class="section event-info">
-        <div class="container">
-            <div class="info-grid">
-                <div class="info-card">
-                    <div class="info-icon">📅</div>
-                    <h3>Date</h3>
-                    <p>October 31st, 2025</p>
-                    <p class="info-detail">Halloween Night</p>
-                </div>
-                <div class="info-card">
-                    <div class="info-icon">⏰</div>
-                    <h3>Time</h3>
-                    <p>8:00 PM - 2:00 AM</p>
-                    <p class="info-detail">Doors open at 7:30 PM</p>
-                </div>
-                <div class="info-card">
-                    <div class="info-icon">📍</div>
-                    <h3>Location</h3>
-                    <p>The Abandoned Mansion</p>
-                    <p class="info-detail">666 Shadow Lane, Dark City</p>
-                </div>
-                <div class="info-card">
-                    <div class="info-icon">🎫</div>
-                    <h3>Admission</h3>
-                    <p>$25 Early Bird</p>
-                    <p class="info-detail">$35 at the door</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section countdown-section">
-        <div class="container">
-            <h2 class="section-title glitch" data-text="TIME UNTIL TERROR">TIME UNTIL TERROR</h2>
-            <div class="countdown" id="countdown">
-                <div class="countdown-item glow-box">
-                    <span class="countdown-value" id="days">00</span>
-                    <span class="countdown-label">Days</span>
-                </div>
-                <div class="countdown-item glow-box">
-                    <span class="countdown-value" id="hours">00</span>
-                    <span class="countdown-label">Hours</span>
-                </div>
-                <div class="countdown-item glow-box">
-                    <span class="countdown-value" id="minutes">00</span>
-                    <span class="countdown-label">Minutes</span>
-                </div>
-                <div class="countdown-item glow-box">
-                    <span class="countdown-value" id="seconds">00</span>
-                    <span class="countdown-label">Seconds</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="schedule" class="section">
+    <!-- Schedule Section -->
+    <section id="schedule" class="schedule-section">
         <div class="container">
             <h2 class="section-title">Event Schedule</h2>
             <p class="section-description">Click on each event to reveal more details...</p>
+
             <div class="timeline">
-                <div class="timeline-item" data-time="7:30 PM">
+                <div class="timeline-item">
                     <div class="timeline-time">7:30 PM</div>
                     <div class="timeline-marker">🚪</div>
                     <div class="timeline-content">
@@ -151,7 +1668,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item" data-time="8:00 PM">
+                <div class="timeline-item">
                     <div class="timeline-time">8:00 PM</div>
                     <div class="timeline-marker">🎭</div>
                     <div class="timeline-content">
@@ -161,27 +1678,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item" data-time="9:00 PM">
+                <div class="timeline-item">
                     <div class="timeline-time">9:00 PM</div>
                     <div class="timeline-marker">🏚️</div>
                     <div class="timeline-content">
                         <h3>Haunted House Tours Begin</h3>
                         <div class="timeline-details">
-                            <p>Brave souls can enter the haunted mansion in groups. Navigate through 7 terrifying rooms filled with live actors, special effects, and jump scares. Tours run continuously until midnight.</p>
+                            <p>Brave souls can enter the haunted mansion in groups. Navigate through 7 terrifying rooms filled with live actors, special effects, and jump scares.</p>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item" data-time="10:00 PM">
+                <div class="timeline-item">
                     <div class="timeline-time">10:00 PM</div>
                     <div class="timeline-marker">👗</div>
                     <div class="timeline-content">
                         <h3>Costume Contest</h3>
                         <div class="timeline-details">
-                            <p>Show off your Halloween costume! Categories include: Scariest, Most Creative, Best Group, and Judges' Choice. Winners receive cash prizes and exclusive merchandise.</p>
+                            <p>Show off your Halloween costume! Categories include: Scariest, Most Creative, Best Group, and Judges' Choice.</p>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item" data-time="11:00 PM">
+                <div class="timeline-item">
                     <div class="timeline-time">11:00 PM</div>
                     <div class="timeline-marker">🎵</div>
                     <div class="timeline-content">
@@ -191,23 +1708,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item" data-time="12:00 AM">
+                <div class="timeline-item">
                     <div class="timeline-time">12:00 AM</div>
                     <div class="timeline-marker">🕛</div>
                     <div class="timeline-content">
                         <h3>Midnight Séance</h3>
                         <div class="timeline-details">
-                            <p>Join us for a real paranormal experience. A professional medium will attempt to contact spirits in the mansion's most haunted room. Limited spots available.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item" data-time="2:00 AM">
-                    <div class="timeline-time">2:00 AM</div>
-                    <div class="timeline-marker">🌙</div>
-                    <div class="timeline-content">
-                        <h3>Event Ends</h3>
-                        <div class="timeline-details">
-                            <p>Last call for drinks. Thank you for surviving the night! Safe travels home... if you can find your way out.</p>
+                            <p>Join us for a real paranormal experience. A professional medium will attempt to contact spirits in the mansion's most haunted room.</p>
                         </div>
                     </div>
                 </div>
@@ -215,46 +1722,236 @@
         </div>
     </section>
 
-    <section class="section activities-section">
+    <!-- Magic Bento Grid -->
+    <section id="bento" class="bento-section">
+        <div class="card-grid">
+            <div class="card card--border-glow" style="background-color: #060010;">
+                <div class="card__header">
+                    <div class="card__label">Date & Time</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">October 31st</h2>
+                    <p class="card__description">8:00 PM - 2:00 AM</p>
+                </div>
+            </div>
+            <div class="card card--border-glow" style="background-color: #060010;">
+                <div class="card__header">
+                    <div class="card__label">Location</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">The Abandoned Mansion</h2>
+                    <p class="card__description">666 Shadow Lane, Dark City</p>
+                </div>
+            </div>
+            <div class="card card--border-glow" style="background-color: #060010;">
+                <div class="card__header">
+                    <div class="card__label">Attractions</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Haunted House</h2>
+                    <p class="card__description">7 terrifying rooms with live actors</p>
+                </div>
+            </div>
+            <div class="card card--border-glow" style="background-color: #060010;">
+                <div class="card__header">
+                    <div class="card__label">Entertainment</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">DJ & Performances</h2>
+                    <p class="card__description">Live music and spooky performances</p>
+                </div>
+            </div>
+            <div class="card card--border-glow" style="background-color: #060010;">
+                <div class="card__header">
+                    <div class="card__label">Food & Drinks</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Spooky Refreshments</h2>
+                    <p class="card__description">Themed cocktails and treats</p>
+                </div>
+            </div>
+            <div class="card card--border-glow" style="background-color: #060010;">
+                <div class="card__header">
+                    <div class="card__label">Tickets</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">$25 Early Bird</h2>
+                    <p class="card__description">$35 at the door</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games" class="games-section">
         <div class="container">
-            <h2 class="section-title">Frightening Activities</h2>
-            <p class="section-description">Experience terror in every corner</p>
-            <div class="activities-grid">
-                <div class="activity-card">
-                    <div class="activity-icon">🏚️</div>
-                    <h3>Haunted Mansion Tour</h3>
-                    <p>Navigate through 7 rooms of pure terror with live actors and special effects that will make your heart race</p>
-                </div>
-                <div class="activity-card">
-                    <div class="activity-icon">🎃</div>
+            <h2 class="section-title">Spooky Games</h2>
+            <p class="section-description">
+                Test your courage with our terrifying games and challenges
+            </p>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-icon">🎃</div>
                     <h3>Pumpkin Carving</h3>
-                    <p>Create your own jack-o'-lantern masterpiece. Tools and pumpkins provided. Best carving wins a prize!</p>
+                    <p>Create your own jack-o'-lantern masterpiece. Tools and pumpkins provided.</p>
                 </div>
-                <div class="activity-card">
-                    <div class="activity-icon">🔮</div>
+                <div class="game-card">
+                    <div class="game-icon">🔮</div>
                     <h3>Fortune Telling</h3>
-                    <p>Visit Madame Mystique for tarot readings and glimpses into your future... if you dare to know</p>
+                    <p>Visit Madame Mystique for tarot readings and glimpses into your future.</p>
                 </div>
-                <div class="activity-card">
-                    <div class="activity-icon">📸</div>
-                    <h3>Photo Booth</h3>
-                    <p>Capture memories with spooky props and themed backgrounds. Instant prints and digital copies available</p>
-                </div>
-                <div class="activity-card">
-                    <div class="activity-icon">🎲</div>
+                <div class="game-card">
+                    <div class="game-icon">🎲</div>
                     <h3>Mystery Games</h3>
-                    <p>Solve puzzles, play Halloween-themed games, and win prizes throughout the night</p>
+                    <p>Solve puzzles and play Halloween-themed games to win prizes.</p>
                 </div>
-                <div class="activity-card">
-                    <div class="activity-icon">🍹</div>
-                    <h3>Potion Bar</h3>
-                    <p>Sample our signature cocktails with names like "Witch's Brew" and "Vampire's Kiss"</p>
+                <div class="game-card">
+                    <div class="game-icon">👻</div>
+                    <h3>Ghost Hunt</h3>
+                    <p>Use our special equipment to detect spirits throughout the mansion.</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">🕷️</div>
+                    <h3>Spider Maze</h3>
+                    <p>Navigate through a pitch-black maze filled with creepy crawlies.</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">💀</div>
+                    <h3>Zombie Escape</h3>
+                    <p>Survive the zombie apocalypse in our immersive escape room experience.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="gallery" class="section">
+    <!-- Contests Section -->
+    <section id="contests" class="contests-section">
+        <div class="container">
+            <h2 class="section-title">Halloween Contests</h2>
+            <p class="section-description">
+                Compete for terrifying trophies and spooky prizes
+            </p>
+            <div class="contests-grid">
+                <div class="contest-card">
+                    <div class="contest-icon">👗</div>
+                    <h3>Costume Contest</h3>
+                    <p>Categories: Scariest, Most Creative, Best Group, Judges' Choice</p>
+                </div>
+                <div class="contest-card">
+                    <div class="contest-icon">🎨</div>
+                    <h3>Face Painting</h3>
+                    <p>Professional artists will transform you into your favorite monster.</p>
+                </div>
+                <div class="contest-card">
+                    <div class="contest-icon">💀</div>
+                    <h3>Scary Story</h3>
+                    <p>Share your most terrifying tale. The scariest story wins a prize.</p>
+                </div>
+                <div class="contest-card">
+                    <div class="contest-icon">🕷️</div>
+                    <h3>Fear Factor</h3>
+                    <p>Test your limits with our spine-chilling challenges and dares.</p>
+                </div>
+                <div class="contest-card">
+                    <div class="contest-icon">🎭</div>
+                    <h3>Monster Makeup</h3>
+                    <p>Show off your special effects makeup skills and win amazing prizes.</p>
+                </div>
+                <div class="contest-card">
+                    <div class="contest-icon">🍫</div>
+                    <h3>Candy Eating</h3>
+                    <p>Who can eat the most Halloween candy in 5 minutes? Winner takes all!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet the Team</h2>
+            <p class="section-description">
+                Our terrifying team is ready to give you the Halloween experience of a lifetime
+            </p>
+            <div class="team-grid">
+                <div class="pc-card-wrapper">
+                    <section class="pc-card">
+                        <div class="pc-inside">
+                            <div class="pc-content">
+                                <div class="pc-details">
+                                    <h3>Amber Nightshade</h3>
+                                    <p>Event Director</p>
+                                </div>
+                            </div>
+                            <div class="pc-user-info">
+                                <div class="pc-user-details">
+                                    <div class="pc-mini-avatar">
+                                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop" alt="Amber Nightshade">
+                                    </div>
+                                    <div class="pc-user-text">
+                                        <div class="pc-handle">@ambernight</div>
+                                        <div class="pc-status">Planning</div>
+                                    </div>
+                                </div>
+                                <button class="pc-contact-btn">Contact</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="pc-card-wrapper">
+                    <section class="pc-card">
+                        <div class="pc-inside">
+                            <div class="pc-content">
+                                <div class="pc-details">
+                                    <h3>Violet Storm</h3>
+                                    <p>Creative Director</p>
+                                </div>
+                            </div>
+                            <div class="pc-user-info">
+                                <div class="pc-user-details">
+                                    <div class="pc-mini-avatar">
+                                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop" alt="Violet Storm">
+                                    </div>
+                                    <div class="pc-user-text">
+                                        <div class="pc-handle">@violetstorm</div>
+                                        <div class="pc-status">Designing</div>
+                                    </div>
+                                </div>
+                                <button class="pc-contact-btn">Contact</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="pc-card-wrapper">
+                    <section class="pc-card">
+                        <div class="pc-inside">
+                            <div class="pc-content">
+                                <div class="pc-details">
+                                    <h3>Rusty Blade</h3>
+                                    <p>Security Head</p>
+                                </div>
+                            </div>
+                            <div class="pc-user-info">
+                                <div class="pc-user-details">
+                                    <div class="pc-mini-avatar">
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Rusty Blade">
+                                    </div>
+                                    <div class="pc-user-text">
+                                        <div class="pc-handle">@rustyblade</div>
+                                        <div class="pc-status">Securing</div>
+                                    </div>
+                                </div>
+                                <button class="pc-contact-btn">Contact</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
         <div class="container">
             <h2 class="section-title">Gallery of Horrors</h2>
             <p class="section-description">Glimpses from previous events</p>
@@ -263,12 +1960,6 @@
                     <img src="https://images.unsplash.com/photo-1509557965875-b88c97052f0e?w=400&h=300&fit=crop" alt="Haunted House">
                     <div class="gallery-overlay">
                         <span>The Mansion</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1570834969809-bb028d2c0b3b?w=400&h=300&fit=crop" alt="Costume Contest">
-                    <div class="gallery-overlay">
-                        <span>Costume Contest</span>
                     </div>
                 </div>
                 <div class="gallery-item">
@@ -295,11 +1986,18 @@
                         <span>Our Guests</span>
                     </div>
                 </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?w=400&h=300&fit=crop" alt="Pumpkins">
+                    <div class="gallery-overlay">
+                        <span>Pumpkin Patch</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="faq" class="section">
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-container">
@@ -361,10 +2059,12 @@
         </div>
     </section>
 
-    <section id="contact" class="section">
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
         <div class="container">
             <h2 class="section-title">Contact the Spirits</h2>
             <p class="section-description">Have questions? Reach out to us... if you dare</p>
+            
             <div class="contact-grid">
                 <div class="contact-info">
                     <div class="contact-item">
@@ -385,20 +2085,22 @@
                         <div class="contact-icon">📍</div>
                         <div>
                             <h3>Address</h3>
-                            <p>666 Shadow Lane<br>Dark City, DC 66666</p>
+                            <p>666 Shadow Lane<br />Dark City, DC 66666</p>
                         </div>
                     </div>
                 </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                
+                <form class="contact-form" id="contactForm">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
                     <button type="submit" class="submit-button">Send Message</button>
                 </form>
             </div>
         </div>
     </section>
 
+    <!-- RSVP Section -->
     <section id="rsvp" class="section rsvp-section">
         <div class="container">
             <h2 class="section-title glitch" data-text="WILL YOU DARE TO ATTEND?">WILL YOU DARE TO ATTEND?</h2>
@@ -414,6 +2116,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -427,9 +2130,14 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#schedule">Schedule</a></li>
+                        <li><a href="#bento">Events</a></li>
+                        <li><a href="#games">Games</a></li>
+                        <li><a href="#contests">Contests</a></li>
+                        <li><a href="#team">Team</a></li>
                         <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <li><a href="#rsvp">RSVP</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -449,6 +2157,487 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Liquid Ether Background Implementation
+        function initLiquidEther() {
+            const container = document.getElementById('liquidEther');
+            if (!container) return;
+
+            // Check if Three.js is available
+            if (typeof THREE === 'undefined') {
+                console.error('Three.js not loaded');
+                return;
+            }
+
+            // Create scene
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ 
+                alpha: true,
+                antialias: true 
+            });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+
+            // Create particles with Halloween colors (orange and purple)
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 5000;
+            
+            const posArray = new Float32Array(particlesCount * 3);
+            const colorArray = new Float32Array(particlesCount * 3);
+            
+            // Halloween colors: orange, purple
+            const colors = [
+                [1.0, 0.42, 0.0],  // Orange
+                [0.55, 0.0, 1.0],  // Purple
+                [1.0, 0.42, 0.0],  // Orange
+                [0.55, 0.0, 1.0],  // Purple
+                [1.0, 0.42, 0.0],  // Orange
+                [0.55, 0.0, 1.0]   // Purple
+            ];
+            
+            for(let i = 0; i < particlesCount * 3; i += 3) {
+                posArray[i] = (Math.random() - 0.5) * 10;
+                posArray[i + 1] = (Math.random() - 0.5) * 10;
+                posArray[i + 2] = (Math.random() - 0.5) * 10;
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                colorArray[i] = color[0];
+                colorArray[i + 1] = color[1];
+                colorArray[i + 2] = color[2];
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.02,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                sizeAttenuation: true
+            });
+            
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            camera.position.z = 5;
+
+            // Mouse movement effect
+            let mouseX = 0;
+            let mouseY = 0;
+            
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                particlesMesh.rotation.x += 0.001;
+                particlesMesh.rotation.y += 0.002;
+                
+                // Mouse interaction
+                particlesMesh.rotation.y += mouseX * 0.0005;
+                particlesMesh.rotation.x += mouseY * 0.0005;
+                
+                // Pulsing effect
+                const time = Date.now() * 0.001;
+                particlesMesh.scale.setScalar(1 + Math.sin(time) * 0.1);
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Navigation functionality
+        function initNavigation() {
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const cardNav = document.getElementById('cardNav');
+            
+            if (hamburgerMenu && cardNav) {
+                hamburgerMenu.addEventListener('click', () => {
+                    hamburgerMenu.classList.toggle('open');
+                    cardNav.classList.toggle('open');
+                    
+                    // Animate height
+                    if (cardNav.classList.contains('open')) {
+                        cardNav.style.height = '260px';
+                    } else {
+                        cardNav.style.height = '60px';
+                    }
+                });
+            }
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (cardNav && cardNav.classList.contains('open')) {
+                            hamburgerMenu.classList.remove('open');
+                            cardNav.classList.remove('open');
+                            cardNav.style.height = '60px';
+                        }
+                    }
+                });
+            });
+        }
+
+        // Countdown timer
+        function initCountdown() {
+            function updateCountdown() {
+                const eventDate = new Date("2025-10-31T20:00:00").getTime();
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").textContent = String(days).padStart(2, "0");
+                document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+                document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+                document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.querySelector(".countdown").innerHTML = '<p class="countdown-expired">The event has begun!</p>';
+                }
+            }
+
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown();
+        }
+
+        // Timeline functionality
+        function initTimeline() {
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    // Close all other items
+                    document.querySelectorAll('.timeline-item').forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('expanded');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('expanded');
+                });
+            });
+        }
+
+        // FAQ functionality
+        function initFAQ() {
+            document.querySelectorAll('.faq-question').forEach(button => {
+                button.addEventListener('click', () => {
+                    const faqItem = button.parentElement;
+                    const isActive = faqItem.classList.contains('active');
+
+                    // Close all FAQ items
+                    document.querySelectorAll('.faq-item').forEach((item) => {
+                        item.classList.remove('active');
+                    });
+
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Profile card interactions
+        function initProfileCards() {
+            document.querySelectorAll('.pc-card-wrapper').forEach(wrapper => {
+                const card = wrapper.querySelector('.pc-card');
+                
+                wrapper.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateY = (x - centerX) / 25;
+                    const rotateX = (centerY - y) / 25;
+                    
+                    card.style.setProperty('--rotate-x', `${rotateX}deg`);
+                    card.style.setProperty('--rotate-y', `${rotateY}deg`);
+                    card.style.setProperty('--pointer-x', `${(x / rect.width) * 100}%`);
+                    card.style.setProperty('--pointer-y', `${(y / rect.height) * 100}%`);
+                    card.style.setProperty('--card-opacity', '1');
+                });
+                
+                wrapper.addEventListener('mouseenter', () => {
+                    card.classList.add('active');
+                });
+                
+                wrapper.addEventListener('mouseleave', () => {
+                    card.classList.remove('active');
+                    card.style.setProperty('--rotate-x', '0deg');
+                    card.style.setProperty('--rotate-y', '0deg');
+                    card.style.setProperty('--card-opacity', '0');
+                });
+                
+                // Contact button functionality
+                const contactBtn = wrapper.querySelector('.pc-contact-btn');
+                if (contactBtn) {
+                    contactBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const name = wrapper.querySelector('.pc-details h3').textContent;
+                        alert(`Contacting ${name}... They'll respond from beyond the grave!`);
+                    });
+                }
+            });
+        }
+
+        // Bento grid interactions
+        function initBentoGrid() {
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    card.style.setProperty('--glow-x', `${(x / rect.width) * 100}%`);
+                    card.style.setProperty('--glow-y', `${(y / rect.height) * 100}%`);
+                    card.style.setProperty('--glow-intensity', '1');
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.setProperty('--glow-intensity', '0');
+                });
+            });
+        }
+
+        // Contact form
+        function initContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Message sent! The spirits will respond soon... 👻');
+                    contactForm.reset();
+                });
+            }
+        }
+
+        // RSVP functionality
+        function initRSVP() {
+            const rsvpYes = document.getElementById('rsvp-yes');
+            const rsvpNo = document.getElementById('rsvp-no');
+            const rsvpMessage = document.getElementById('rsvp-message');
+
+            if (rsvpYes && rsvpNo && rsvpMessage) {
+                rsvpYes.addEventListener('click', () => {
+                    rsvpYes.classList.add('clicked');
+                    rsvpMessage.textContent = "🎃 Brave soul! We'll see you on Halloween night! 🎃";
+                    rsvpMessage.style.color = "var(--accent-orange)";
+
+                    // Remove animation class after animation completes
+                    setTimeout(() => {
+                        rsvpYes.classList.remove('clicked');
+                    }, 600);
+                });
+
+                rsvpNo.addEventListener('click', () => {
+                    rsvpMessage.textContent = "👻 The spirits are disappointed... but we understand. 👻";
+                    rsvpMessage.style.color = "var(--accent-purple)";
+                });
+            }
+        }
+
+        // Halloween effects
+        function initHalloweenEffects() {
+            // Random glitch effect
+            function randomGlitch() {
+                const glitchElements = document.querySelectorAll(".glitch");
+                glitchElements.forEach((element) => {
+                    if (Math.random() > 0.95) {
+                        element.style.animation = "none";
+                        setTimeout(() => {
+                            element.style.animation = "glitch 3s infinite";
+                        }, 10);
+                    }
+                });
+            }
+
+            setInterval(randomGlitch, 2000);
+
+            // Ghost cursor trail
+            document.addEventListener("mousemove", (e) => {
+                if (Math.random() > 0.98) {
+                    const ghost = document.createElement("div");
+                    ghost.textContent = "👻";
+                    ghost.style.position = "fixed";
+                    ghost.style.left = e.clientX + "px";
+                    ghost.style.top = e.clientY + "px";
+                    ghost.style.pointerEvents = "none";
+                    ghost.style.fontSize = "20px";
+                    ghost.style.zIndex = "9999";
+                    ghost.style.animation = "fadeOut 2s forwards";
+                    document.body.appendChild(ghost);
+
+                    setTimeout(() => {
+                        ghost.remove();
+                    }, 2000);
+                }
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initLiquidEther();
+            initNavigation();
+            initCountdown();
+            initTimeline();
+            initFAQ();
+            initProfileCards();
+            initBentoGrid();
+            initContactForm();
+            initRSVP();
+            initHalloweenEffects();
+        });
+
+        // 1. Random haunted dialog popups
+        function randomHauntedDialog() {
+        const messages = [
+            "Did you see that?",
+            "I'm watching...",
+            "You shouldn't be here.",
+            "Something is behind you.",
+            "RUN.",
+            "It's too late.",
+            "Did you just blink?",
+            "Can you feel it?",
+            "Was that a shadow?",
+            "Did you hear it?",
+            "Something went wrong...",
+            "404: sanity not found.",
+            "Are you alone?"
+        ];
+        if (Math.random() < 0.011) {
+            const msg = messages[Math.floor(Math.random() * messages.length)];
+            const dialog = document.createElement('div');
+            dialog.className = 'haunted-dialog';
+            dialog.textContent = msg;
+            document.body.appendChild(dialog);
+            setTimeout(() => dialog.remove(), 1800);
+        }
+        }
+        setInterval(randomHauntedDialog, 1340);
+
+        // 2. Random haunted sound
+        const hauntedSounds = [
+        'whisper1.mp3', // add to your directory!
+        'creak2.mp3'
+        ];
+        function randomHauntedSound() {
+        if (Math.random() < 0.008) {
+            const audio = new Audio(hauntedSounds[Math.floor(Math.random() * hauntedSounds.length)]);
+            audio.volume = 0.11;
+            audio.play();
+        }
+        }
+        setInterval(randomHauntedSound, 4000);
+
+        // 3. Flashing haunted ghost image
+        function ghostFlash() {
+        if (Math.random() < 0.012) {
+            const ghost = document.createElement('img');
+            ghost.src = 'ghost.png'; // add a transparent ghost!
+            ghost.className = 'ghost-flash';
+            document.body.appendChild(ghost);
+            setTimeout(() => ghost.remove(), 170);
+        }
+        }
+        setInterval(ghostFlash, 570);
+
+        // 4. Random cursed text and scroll effects
+        function randomCurseEffect() {
+        const targets = document.querySelectorAll('.section-title, h1, h2, .hero-title, .rsvp-message');
+        if (targets.length && Math.random() < 0.016) {
+            const el = targets[Math.floor(Math.random() * targets.length)];
+            el.classList.add('cursed');
+            setTimeout(() => el.classList.remove('cursed'), 800);
+        }
+        }
+        setInterval(randomCurseEffect, 1600);
+
+        function randomReverseScroll() {
+        const scroller = document.querySelector('html');
+        if (Math.random() < 0.013) {
+            scroller.classList.add('reverse-scroll');
+            setTimeout(() => scroller.classList.remove('reverse-scroll'), 800);
+        }
+        }
+        setInterval(randomReverseScroll, 4900);
+
+        // 5. Pointer warps
+        document.addEventListener("mousemove", (e) => {
+        if (Math.random() > 0.98) {
+            const ghost = document.createElement("div");
+            ghost.textContent = "👻";
+            ghost.style.position = "fixed";
+            ghost.style.left = e.clientX + "px";
+            ghost.style.top = e.clientY + "px";
+            ghost.style.pointerEvents = "none";
+            ghost.style.fontSize = "20px";
+            ghost.style.zIndex = "9999";
+            ghost.style.animation = "fadeOut 2s forwards";
+            document.body.appendChild(ghost);
+            setTimeout(() => ghost.remove(), 2000);
+        }
+        // Make pointer stutter occasionally
+        if (Math.random() < 0.005) {
+            document.body.style.cursor = "not-allowed";
+            setTimeout(() => { document.body.style.cursor = ""; }, 700);
+        }
+        });
+
+        // 6. Page-wide random flicker
+        function hauntedGlobalFlicker() {
+        if (Math.random() < 0.006) {
+            document.body.style.opacity = "0.85";
+            setTimeout(() => { document.body.style.opacity = "1"; }, 110);
+        }
+        }
+        setInterval(hauntedGlobalFlicker, 500);
+
+        // 7. Randomly swap nav or gallery titles
+        function swapNavGalleryTitles() {
+        const els = document.querySelectorAll('.nav-card-label, .gallery-overlay span, .feature-card h3');
+        if (els.length && Math.random() < 0.008) {
+            const el = els[Math.floor(Math.random() * els.length)];
+            const orig = el.textContent;
+            el.textContent = "???";
+            setTimeout(() => { el.textContent = orig; }, 500);
+        }
+        }
+        setInterval(swapNavGalleryTitles, 2600);
+
+    </script>
 </body>
 </html>
